@@ -1,0 +1,45 @@
+
+REDCap:
+  url: "https://redcap.chop.edu/api/"
+  projects:
+    upntb: "<your_token>"
+
+BRP:
+  url: "https://brp.research.chop.edu/portal/api/"
+  token: "<your_token>"
+  protocols:
+    - 1
+    - 2
+
+sources:
+  nautilus:
+    host: <nautilus_host>
+    port: <nautilus_port>
+    user: <db_user>
+    password: <db_password>
+    db: <db>
+    ssh_user:
+    ssh_password:
+
+  cbio:
+    host: <cbio_host>
+    port: <cbio_port>
+    user: <db_user>
+    password: <db_password>
+    db: <db>
+    ssh_user: <ssh_user>
+    ssh_password: <ssh_password>
+
+targets:
+  local:
+    host: localhost
+    port: 5432
+    user: <db_name>
+    password:
+    db: upntb
+  container:
+    host: db
+    port: 5432
+    user: postgres
+    password:
+    db: upntb

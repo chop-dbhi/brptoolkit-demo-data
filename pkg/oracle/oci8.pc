@@ -1,0 +1,10 @@
+prefix=/go/src/app/pkg/oracle/instantclient_11_2
+libdir=${prefix}
+includedir=${prefix}/sdk/include/
+
+Name: OCI
+Description: Oracle database engine
+Version: 11.2
+Libs: -L${libdir} -lclntsh
+Libs.private:
+Cflags: -I${includedir}
