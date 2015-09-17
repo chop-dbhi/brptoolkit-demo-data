@@ -42,6 +42,7 @@ drop table if exists visit CASCADE;
 create table visit as
 select distinct
     row_number() over()::int as id,
+    v.study_id as visit_id,
     v.redcap_event_name as visit_type,
     cast(v.height as integer) as height,
     cast(v.weight as integer) as weight,
