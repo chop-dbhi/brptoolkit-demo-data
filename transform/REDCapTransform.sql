@@ -22,7 +22,7 @@ where
 drop table if exists meal CASCADE;
 create table meal as
 select distinct
-    m.study_id as meal_id,
+    m.study_id as visit_id,
     m.redcap_event_name as meal_type,
     m.meal_description,
     m.healthy,
@@ -66,6 +66,7 @@ drop table if exists visit_medications CASCADE;
 create table visit_medications as
 select distinct
     row_number() over()::int as id,
+    m.study_id as visit_id,
     m.redcap_event_name as visit_type,
     m.med_type as med_type,
     ehb.ehb_id
