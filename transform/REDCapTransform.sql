@@ -16,9 +16,7 @@ from
     ehb_link ehb
 where
     ehb.external_id = d.study_id and
-    d.date_enrolled is not null and
-    d.ethnicity  is not null and
-    race is not null;
+    d.form_status is not null;
 
 /* Create Meal Table */
 drop table if exists meal CASCADE;
@@ -33,13 +31,15 @@ from
     meal_description_form as m,
     ehb_link ehb
 where
-    ehb.external_id = m.study_id;
+    ehb.external_id = m.study_id and
+    m.form_status is not null;
 
 
 /* Create Visit Table */
 drop table if exists visit CASCADE;
 create table visit as
 select distinct
+    row_number() over()::int as id,
     v.redcap_event_name as visit_type,
     cast(v.height as integer) as height,
     cast(v.weight as integer) as weight,
@@ -58,7 +58,9 @@ from
     baseline_visit_data as v,
     ehb_link ehb
 where
-    ehb.external_id = v.study_id;
+    ehb.external_id = v.study_id and
+    v.form_status is not null;
+
 
 
 
