@@ -123,7 +123,7 @@ var getSubjects = func(d ProtocolDataSource, c chan []Subject) {
 	url := fmt.Sprintf("%sprotocoldatasources/%d/subjects/", Bc.Url, d.Id)
 	r := brpAPIRequest(url)
 	err := json.Unmarshal(r, &as)
-    if err != nil {
+	if err != nil {
 		log.Fatal(err)
 	}
 	c <- as.Subjects
@@ -188,7 +188,7 @@ var generateLinkTable = func(args []string) {
 	for subjects := range subjects_queue {
 		for _, subject := range subjects {
 			for _, record := range subject.ExternalRecords {
-                stmt, err := txn.Prepare(fmt.Sprintf("insert into ehb_link (ehb_id, external_system_id, external_id, organization_id, organization_subject_id, created, dob) values (%d, %d, '%s', %d, '%s', '%s', '%s')",
+				stmt, err := txn.Prepare(fmt.Sprintf("insert into ehb_link (ehb_id, external_system_id, external_id, organization_id, organization_subject_id, created, dob) values (%d, %d, '%s', %d, '%s', '%s', '%s')",
 					subject.Id,
 					record.ExternalSystemId,
 					record.RecordId,

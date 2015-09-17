@@ -61,7 +61,61 @@ where
     ehb.external_id = v.study_id and
     v.form_status is not null;
 
-
-
-
 /* Visit Meds */
+drop table if exists visit_medications CASCADE;
+create table visit_medications as
+select distinct
+    row_number() over()::int as id,
+    m.redcap_event_name as visit_type,
+    m.med_type as med_type,
+    ehb.ehb_id
+from
+    ehb_link as ehb,
+    (
+        select
+            study_id,
+            redcap_event_name,
+            meds___1 as med_type
+        from
+            baseline_visit_data
+        where
+            meds___1 is not null
+        union all
+        select
+            study_id,
+            redcap_event_name,
+            meds___2 as med_type
+        from
+            baseline_visit_data
+        where
+            meds___2 is not null
+        union all
+        select
+            study_id,
+            redcap_event_name,
+            meds___3 as med_type
+        from
+            baseline_visit_data
+        where
+            meds___3 is not null
+        union all
+        select
+            study_id,
+            redcap_event_name,
+            meds___4 as med_type
+        from
+            baseline_visit_data
+        where
+            meds___4 is not null
+        union all
+        select
+            study_id,
+            redcap_event_name,
+            meds___5 as med_type
+        from
+            baseline_visit_data
+        where
+            meds___5 is not null
+    ) m
+where
+    ehb.external_id = m.study_id;

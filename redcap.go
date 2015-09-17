@@ -109,7 +109,7 @@ var redcapStaging = func(args []string) {
 					}
 
 					if err != nil {
-						log.Fatal("[redcap][database] unable to start transaction",err)
+						log.Fatal("[redcap][database] unable to start transaction", err)
 					}
 
 					reader := csv.NewReader(r)
@@ -149,7 +149,7 @@ var redcapStaging = func(args []string) {
 					err = txn.Commit()
 					log.Printf("Loaded REDCap form \"%s\"\n", f.Name)
 					if err != nil {
-						log.Fatal("[redcap][database] unable to commit form to table",err)
+						log.Fatal("[redcap][database] unable to commit form to table", err)
 					}
 				}(form)
 			} else {
