@@ -2,6 +2,7 @@
 drop table if exists subject CASCADE;
 create table subject as
 select distinct
+    row_number() over()::int as id,
     d.study_id,
     d.date_enrolled,
     d.ethnicity,
@@ -22,6 +23,7 @@ where
 drop table if exists meal CASCADE;
 create table meal as
 select distinct
+    row_number() over()::int as id,
     m.study_id as visit_id,
     m.redcap_event_name as meal_type,
     m.meal_description,
